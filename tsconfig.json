@@ -21,7 +21,8 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       "@shell/feature": ["./src/shell/feature/index.ts"],
-      "@shell/ui": ["./src/shell/ui/index.ts"]
+      "@shell/ui": ["./src/shell/ui/index.ts"],
+      "@home/feature": ["./src/home/feature/index.ts"]
     }
   },
   "angularCompilerOptions": {
