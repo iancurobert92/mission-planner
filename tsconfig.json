@@ -20,7 +20,8 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@shell/feature": ["./src/shell/feature/index.ts"]
+      "@shell/feature": ["./src/shell/feature/index.ts"],
+      "@shell/ui": ["./src/shell/ui/index.ts"]
     }
   },
   "angularCompilerOptions": {
