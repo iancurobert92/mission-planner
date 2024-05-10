@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <a class="d-flex" [href]="logoHref">
+  <a class="d-flex" [routerLink]="[logoHref]">
     <img width="48px" height="48px" [src]="logoUrl" alt="Logo" />
   </a>
   <button
@@ -23,7 +23,7 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <a mat-menu-item [href]="item.url" *ngFor="let item of navItems">{{
+  <a mat-menu-item [routerLink]="item.url" *ngFor="let item of navItems">{{
     item.text
   }}</a>
 </mat-menu>

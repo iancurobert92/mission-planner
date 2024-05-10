@@ -5,6 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatToolbar } from '@angular/material/toolbar';
 import { NavItem } from './nav-item.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-app-bar',
@@ -17,6 +18,7 @@ import { NavItem } from './nav-item.model';
     MatMenuTrigger,
     MatMenuItem,
     NgFor,
+    RouterLink,
   ],
   templateUrl: './app-bar.component.html',
   styleUrl: './app-bar.component.scss',
