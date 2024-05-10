@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <a class="d-flex" [routerLink]="[logoHref]">
+    <img width="48px" height="48px" [src]="logoUrl" alt="Logo" />
+  </a>
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    aria-label="Menu button"
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{ title }}</span>
+  <span class="toolbar-spacer"></span>
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    aria-label="Share button"
+    (click)="onShareButtonClick()"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <a mat-menu-item [routerLink]="item.url" *ngFor="let item of navItems">{{
+    item.text
+  }}</a>
+</mat-menu>
