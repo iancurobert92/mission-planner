@@ -1,8 +1,11 @@
+$tooltipHeight: 64px;
+$spacing: 1rem;
+
 .app-bar {
   position: fixed;
   width: 100%;
 }
 
 .app-page {
-  padding-top: 64px;
+  padding: calc($tooltipHeight + $spacing) 1rem 1rem 1rem;
 }
