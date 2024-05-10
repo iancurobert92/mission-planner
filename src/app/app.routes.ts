@@ -21,6 +21,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('@planner/feature').then((c) => c.PlannerComponent),
       },
+      {
+        path: 'player',
+        loadComponent: () =>
+          import('@player/feature').then((c) => c.PlayerComponent),
+      },
     ],
   },
 ];
