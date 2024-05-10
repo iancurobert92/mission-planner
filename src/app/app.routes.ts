@@ -16,6 +16,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('@home/feature').then((c) => c.HomeComponent),
       },
+      {
+        path: 'planner',
+        loadComponent: () =>
+          import('@planner/feature').then((c) => c.PlannerComponent),
+      },
     ],
   },
 ];
