@@ -23,7 +23,8 @@
       "@shell/feature": ["./src/shell/feature/index.ts"],
       "@shell/ui": ["./src/shell/ui/index.ts"],
       "@home/feature": ["./src/home/feature/index.ts"],
-      "@planner/feature": ["./src/planner/feature/index.ts"]
+      "@planner/feature": ["./src/planner/feature/index.ts"],
+      "@player/feature": ["./src/player/feature/index.ts"]
     }
   },
   "angularCompilerOptions": {
