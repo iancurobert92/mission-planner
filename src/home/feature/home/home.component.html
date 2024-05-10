@@ -1,1 +1,161 @@
-<h1>Home Page</h1>
+<div class="p-3">
+  <h1 class="m-0 p-0">Home Page</h1>
+
+  <div class="pt-3">
+    <h3 class="m-0 p-0">About the app:</h3>
+    <span>
+      The purpose of this application is to allow operators to create the route
+      that a robot needs to follow for conducting inspections on an industrial
+      site, while also enabling them to visually track its movements through a
+      simulator.
+    </span>
+  </div>
+
+  <div class="pt-3">
+    <h3 class="m-0 p-0">How to use the app:</h3>
+    <ul class="m-0">
+      <li>
+        <span
+          >Click on the "hamburger" button in the top-left corner of the screen
+          and select "Planner" in order to create a new route.
+        </span>
+      </li>
+      <li>
+        <span
+          >Click on the "hamburger" button in the top-left corner of the screen
+          and select "Player" in order to visualise the robot's movements.
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pt-3">
+    <h3 class="m-0 p-0">Application structure:</h3>
+    <div class="pl-3">
+      <span>
+        The application is structured into modules that represent different
+        features. A module can in turn contain several modules of various types,
+        each with well-defined purposes:
+      </span>
+      <ol class="m-0">
+        <li>
+          <span
+            ><strong>data-access</strong> - contains code for interacting with a
+            back-end system. It also includes all the code related to state
+            management.
+          </span>
+        </li>
+        <li>
+          <span
+            ><strong>feature</strong> - contains a set of files that configure a
+            business use case or a page in an application
+          </span>
+        </li>
+        <li>
+          <span
+            ><strong>ui</strong> - contains only presentational components (also
+            called "dumb" components).
+          </span>
+        </li>
+        <li>
+          <span
+            ><strong>util</strong> - contains low-level utilities used by many
+            modules.
+          </span>
+        </li>
+      </ol>
+      <ul class="m-0 pt-3">
+        <li>
+          The <strong>app</strong> folder contains the root component and the
+          application's routing configuration.
+        </li>
+        <li>
+          The <strong>shell</strong> folder contains wrappers for different
+          feature modules.
+        </li>
+        <li>
+          The <strong>home</strong> folder exclusively contains components,
+          services, models, etc., dedicated to the functionality of the Home
+          feature.
+        </li>
+        <li>
+          The <strong>planner</strong> folder exclusively contains components,
+          services, models, etc., dedicated to the functionality of the Planner
+          feature.
+        </li>
+        <li>
+          The <strong>player</strong> folder exclusively contains components,
+          services, models, etc., dedicated to the functionality of the Player
+          feature.
+        </li>
+        <li>
+          The <strong>assets</strong> folder holds static files like images and
+          JSON data for direct use in the application.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pt-3">
+    <h3 class="m-0 p-0">Application hierarchy:</h3>
+    <ul class="m-0">
+      <li>
+        App
+        <ul>
+          <li>
+            Shell
+            <ul>
+              <li>Home</li>
+              <li>Planner</li>
+              <li>Player</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pt-3">
+    <h3 class="m-0 p-0">Application setup:</h3>
+    <div class="pl-3">
+      <span
+        >To serve, build, and run the Angular app successfully, please follow
+        these steps:</span
+      >
+      <ol class="m-0">
+        <li>
+          Make sure you have Node.js and npm installed on your system. You can
+          download and install them from
+          <a href="https://nodejs.org/en">Node.js official website</a>.
+        </li>
+        <li>
+          Install Angular CLI globally by running the following command in your
+          terminal: <strong>npm install -g &commat;angular/cli</strong>
+        </li>
+
+        <li>
+          Install Dependencies by running the following command in your
+          terminal:
+          <strong>npm install</strong>
+        </li>
+        <li>
+          Serve the App locally by running the following command in your
+          terminal:
+          <strong>ng serve</strong>
+        </li>
+        <li>
+          Build the App by running the following command in your terminal:
+          <strong>ng build</strong>
+        </li>
+      </ol>
+      <span
+        >For more information, please refer to the
+        <a
+          href="https://github.com/iancurobert92/mission-planner/blob/main/README.md"
+          >README</a
+        >
+        file located in the root of the repository.
+      </span>
+    </div>
+  </div>
+</div>
