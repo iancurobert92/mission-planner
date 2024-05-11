@@ -45,5 +45,6 @@ export class CoordinatesInputComponent {
   onAddButtonClick() {
     if (!this.form.valid) return this.form.markAllAsTouched();
     this.plannerService.addCoordinate(this.form.getRawValue());
+    this.form.reset();
   }
 }
