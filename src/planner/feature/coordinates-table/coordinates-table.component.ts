@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   MatCell,
@@ -11,22 +12,7 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
-import { Coordinate } from '../../data-access/models';
-import { PlannerService } from '../../data-access/services';
-import { AsyncPipe } from '@angular/common';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: Coordinate[] = [
-  { name: 'Top-left', x: 20, y: 10 },
-  { name: 'Top-left', x: 20, y: 10 },
-  { name: 'Top-left', x: 20, y: 10 },
-];
+import { PlannerService } from '@planner/data-access';
 
 @Component({
   selector: 'app-coordinates-table',
