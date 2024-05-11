@@ -28,9 +28,9 @@ import { PlannerService } from '@planner/data-access';
 })
 export class CoordinatesInputComponent {
   form = this.fb.group<CoordinatesInputForm>({
-    name: this.fb.control(null, Validators.required),
-    x: this.fb.control(null, Validators.required),
-    y: this.fb.control(null, Validators.required),
+    name: this.fb.nonNullable.control('', Validators.required),
+    x: this.fb.nonNullable.control(0, Validators.required),
+    y: this.fb.nonNullable.control(0, Validators.required),
   });
 
   get formControls() {
