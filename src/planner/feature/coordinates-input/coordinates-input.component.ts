@@ -9,6 +9,7 @@ import { MatButton } from '@angular/material/button';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { CoordinatesInputForm } from './coordinates-input-form.model';
+import { PlannerService } from '@planner/data-access';
 
 @Component({
   selector: 'app-coordinates-input',
@@ -36,9 +37,13 @@ export class CoordinatesInputComponent {
     return this.form.controls;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private plannerService: PlannerService
+  ) {}
 
   onAddButtonClick() {
     if (!this.form.valid) return this.form.markAllAsTouched();
+    this.plannerService.addCoordinate(this.form.getRawValue());
   }
 }
