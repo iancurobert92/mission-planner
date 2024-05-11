@@ -5,9 +5,3 @@ export interface CoordinatesInputForm {
   x: FormControl<string | null>;
   y: FormControl<string | null>;
 }
-
-export interface CoordinatesInputValue {
-  name: string | null;
-  x: string | null;
-  y: string | null;
-}
