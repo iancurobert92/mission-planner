@@ -1,0 +1,46 @@
+<form class="form-container" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      placeholder="Name"
+      [formControl]="formControls.name"
+      required
+    />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>X</mat-label>
+    <input
+      type="number"
+      matInput
+      placeholder="X"
+      [formControl]="formControls.x"
+      required
+    />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Y</mat-label>
+    <input
+      type="number"
+      matInput
+      placeholder="Y"
+      [formControl]="formControls.y"
+      required
+    />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <button
+    class="button-mb"
+    type="button"
+    mat-flat-button
+    color="primary"
+    (click)="onAddButtonClick()"
+  >
+    Add
+  </button>
+</form>

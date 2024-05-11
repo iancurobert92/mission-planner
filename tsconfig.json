@@ -25,6 +25,8 @@
       "@home/feature": ["./src/home/feature/index.ts"],
       "@home/ui": ["./src/home/ui/index.ts"],
       "@planner/feature": ["./src/planner/feature/index.ts"],
+      "@planner/data-access": ["./src/planner/data-access/index.ts"],
+      "@planner/util": ["./src/planner/util/index.ts"],
       "@player/feature": ["./src/player/feature/index.ts"]
     }
   },

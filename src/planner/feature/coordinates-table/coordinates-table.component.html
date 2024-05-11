@@ -1,0 +1,34 @@
+<table
+  mat-table
+  [dataSource]="(coordinates$ | async) ?? []"
+  class="mat-elevation-z0"
+>
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>#</th>
+    <td mat-cell *matCellDef="let i = index">
+      {{ i + 1 }}
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="x">
+    <th mat-header-cell *matHeaderCellDef>X</th>
+    <td mat-cell *matCellDef="let element">{{ element.x }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="y">
+    <th mat-header-cell *matHeaderCellDef>Y</th>
+    <td mat-cell *matCellDef="let element">{{ element.y }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
