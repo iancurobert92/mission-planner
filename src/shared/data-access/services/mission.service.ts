@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { Coordinate } from '../models';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MissionService {
-  getMissionTargetPoints() {
-    return of([
-      { x: 80, y: 20 },
-      { x: 600, y: 20 },
-      { x: 600, y: 300 },
-      { x: 80, y: 300 },
-    ]);
+  constructor(private localStorageService: LocalStorageService) {}
+
+  getMissionTargetPoints(): Observable<Coordinate[]> {
+    return of(this.localStorageService.getMissionTargetPoints());
+  }
+
+  addMissionTargetPoint(point: Coordinate) {
+    return of(this.localStorageService.addMissionTargetPoint(point));
+  }
+
+  deleteAllMissionTargetPoints() {
+    return of(this.localStorageService.deleteAllMissionTargetPoints());
   }
 }
