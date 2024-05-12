@@ -29,6 +29,7 @@
       "@planner/util": ["./src/planner/util/index.ts"],
       "@player/feature": ["./src/player/feature/index.ts"],
       "@player/data-access": ["./src/player/data-access/index.ts"],
+      "@player/util": ["./src/player/util/index.ts"],
       "@shared/data-access": ["./src/shared/data-access/index.ts"]
     }
   },
