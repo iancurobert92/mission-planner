@@ -1,1 +1,36 @@
 <h1>Player page</h1>
+<canvas
+  #missionMap
+  class="missions-map"
+  [width]="MISSIONS_MAP_WIDTH"
+  [height]="MISSIONS_MAP_HEIGHT"
+></canvas>
+
+<div>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="start()"
+    [disabled]="isMoving || isDone"
+  >
+    <mat-icon class="p-0 m-0">play_arrow</mat-icon>
+  </button>
+  <button
+    class="ml-3"
+    mat-flat-button
+    color="warn"
+    (click)="stop()"
+    [disabled]="!isMoving || isDone"
+  >
+    <mat-icon class="p-0 m-0">stop_arrow</mat-icon>
+  </button>
+  <button
+    class="ml-3"
+    mat-flat-button
+    color="primary"
+    (click)="reset()"
+    [disabled]="!isDone"
+  >
+    <mat-icon class="p-0 m-0">restart_alt</mat-icon>
+  </button>
+</div>
