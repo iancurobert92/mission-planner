@@ -44,14 +44,10 @@ export class PlayerComponent implements OnInit, AfterViewInit {
   constructor(private playerService: PlayerService) {}
 
   ngOnInit(): void {
-    this.playerService.targetPoints$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => (this.targetPoints = value));
-
     this.playerService
       .getTargetPoints()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe((value) => (this.targetPoints = value));
   }
 
   ngAfterViewInit(): void {
