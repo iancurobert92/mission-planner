@@ -34,7 +34,8 @@ export class PlayerComponent implements OnInit, AfterViewInit {
   targetPoints: Coordinate[] = [];
   isMoving: boolean = false;
   isDone: boolean = false;
-  isCurrentTargetReached = true;
+  isCurrentTargetReached: boolean = true;
+  isPlayerActive: boolean = false;
 
   private ctx?: CanvasRenderingContext2D | null;
   private robotImage = new Image();
@@ -48,7 +49,10 @@ export class PlayerComponent implements OnInit, AfterViewInit {
     this.playerService
       .getTargetPoints()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => (this.targetPoints = value));
+      .subscribe((value) => {
+        this.targetPoints = value;
+        this.isPlayerActive = this.targetPoints.length > 1;
+      });
   }
 
   ngAfterViewInit(): void {
@@ -56,6 +60,8 @@ export class PlayerComponent implements OnInit, AfterViewInit {
   }
 
   start() {
+    if (!this.targetPoints.length) return;
+
     this.isMoving = true;
 
     if (this.isCurrentTargetReached) {

@@ -18,7 +18,7 @@
         mat-flat-button
         color="primary"
         (click)="start()"
-        [disabled]="isMoving || isDone"
+        [disabled]="isMoving || isDone || !isPlayerActive"
       >
         <mat-icon class="p-0 m-0">play_arrow</mat-icon>
       </button>
@@ -27,7 +27,7 @@
         mat-flat-button
         color="warn"
         (click)="stop()"
-        [disabled]="!isMoving || isDone"
+        [disabled]="!isMoving || isDone || !isPlayerActive"
       >
         <mat-icon class="p-0 m-0">stop_arrow</mat-icon>
       </button>
@@ -36,7 +36,7 @@
         mat-flat-button
         color="primary"
         (click)="reset()"
-        [disabled]="!isDone"
+        [disabled]="!isDone || !isPlayerActive"
       >
         <mat-icon class="p-0 m-0">restart_alt</mat-icon>
       </button>
