@@ -12,7 +12,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { PlayerService } from '@player/data-access';
-import { Coordinate } from '@shared/data-access';
+import { CanvasUtils } from '@player/util';
+import { Coordinate, Point } from '@shared/data-access';
 
 @Component({
   selector: 'app-player',
@@ -39,7 +40,7 @@ export class PlayerComponent implements OnInit, AfterViewInit {
 
   private ctx?: CanvasRenderingContext2D | null;
   private robotImage = new Image();
-  private robotPosition: Coordinate = { name: '', x: 0, y: 0 };
+  private robotPosition: Point = { x: 0, y: 0 };
   private currentTargetPointIndex: number = 0;
   private destroyRef = inject(DestroyRef);
 
@@ -87,12 +88,7 @@ export class PlayerComponent implements OnInit, AfterViewInit {
 
   private initMissionsMap() {
     this.ctx = this.missionMap?.nativeElement.getContext('2d');
-    this.ctx?.clearRect(
-      0,
-      0,
-      this.MISSIONS_MAP_WIDTH,
-      this.MISSIONS_MAP_HEIGHT
-    );
+    this.clearMissionsMap();
     this.addRobot();
     this.drawBullets();
   }
@@ -120,38 +116,44 @@ export class PlayerComponent implements OnInit, AfterViewInit {
   }
 
   private goToTarget(targetPoint: Coordinate, onComplete: () => void) {
-    window.requestAnimationFrame(this.move.bind(this, targetPoint, onComplete));
+    window.requestAnimationFrame(
+      this.moveTo.bind(this, targetPoint, onComplete)
+    );
   }
 
-  private move(targetPos: Coordinate, onComplete: () => void) {
+  private moveTo(targetPos: Coordinate, onComplete: () => void) {
     if (!this.isMoving) return;
 
-    var diffX = targetPos.x - this.robotPosition.x;
-    var diffY = targetPos.y - this.robotPosition.y;
-    var distance = Math.sqrt(diffX * diffX + diffY * diffY);
-    var newX = this.robotPosition.x + (diffX / distance) * this.ROBOT_SPEED;
-    var newY = this.robotPosition.y + (diffY / distance) * this.ROBOT_SPEED;
-    this.robotPosition.x = newX;
-    this.robotPosition.y = newY;
+    const posDiff = CanvasUtils.calculatePosDiff(this.robotPosition, targetPos);
+    const distance = CanvasUtils.calculateDistance(posDiff);
+    this.robotPosition = CanvasUtils.calculateNewPos(
+      this.robotPosition,
+      posDiff,
+      distance,
+      this.ROBOT_SPEED
+    );
+    this.clearMissionsMap();
+    this.drawRobot();
+    this.drawBullets();
 
+    if (
+      Math.abs(this.robotPosition.x - targetPos.x) < this.ROBOT_SPEED &&
+      Math.abs(this.robotPosition.y - targetPos.y) < this.ROBOT_SPEED
+    ) {
+      onComplete();
+      return;
+    }
+
+    requestAnimationFrame(this.moveTo.bind(this, targetPos, onComplete));
+  }
+
+  private clearMissionsMap() {
     this.ctx?.clearRect(
       0,
       0,
       this.MISSIONS_MAP_WIDTH,
       this.MISSIONS_MAP_HEIGHT
     );
-    this.drawRobot();
-    this.drawBullets();
-
-    if (
-      Math.abs(newX - targetPos.x) < this.ROBOT_SPEED &&
-      Math.abs(newY - targetPos.y) < this.ROBOT_SPEED
-    ) {
-      onComplete();
-      return;
-    }
-
-    requestAnimationFrame(this.move.bind(this, targetPos, onComplete));
   }
 
   private addRobot() {
@@ -176,13 +178,13 @@ export class PlayerComponent implements OnInit, AfterViewInit {
 
   private drawBullets() {
     this.targetPoints.forEach((coord) => {
-      if (this.ctx) {
-        this.ctx.beginPath();
-        this.ctx.arc(coord.x, coord.y, this.BULLET_RADIUS, 0, Math.PI * 2);
-        this.ctx.fillStyle = this.BULLET_COLOR;
-        this.ctx.fill();
-        this.ctx.closePath();
-      }
+      if (this.ctx)
+        CanvasUtils.drawBullet(
+          this.ctx,
+          coord,
+          this.BULLET_RADIUS,
+          this.BULLET_COLOR
+        );
     });
   }
 }
