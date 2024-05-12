@@ -1,2 +1,13 @@
-<app-coordinates-input />
+<h1>Planner page</h1>
+<div class="actions-bar">
+  <app-coordinates-input />
+  <button
+    class="button-mb"
+    mat-flat-button
+    color="warn"
+    (click)="onDeleteButtonClick()"
+  >
+    <mat-icon class="m-0">delete</mat-icon>
+  </button>
+</div>
 <app-coordinates-table />

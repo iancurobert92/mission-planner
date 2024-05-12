@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -10,6 +10,7 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { CoordinatesInputForm } from './coordinates-input-form.model';
 import { PlannerService } from '@planner/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-coordinates-input',
@@ -33,6 +34,8 @@ export class CoordinatesInputComponent {
     y: this.fb.nonNullable.control(0, Validators.required),
   });
 
+  private destroyRef = inject(DestroyRef);
+
   get formControls() {
     return this.form.controls;
   }
@@ -44,7 +47,10 @@ export class CoordinatesInputComponent {
 
   onAddButtonClick() {
     if (!this.form.valid) return this.form.markAllAsTouched();
-    this.plannerService.addCoordinate(this.form.getRawValue());
+    this.plannerService
+      .addCoordinate(this.form.getRawValue())
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
     this.form.reset();
   }
 }
