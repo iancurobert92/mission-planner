@@ -27,7 +27,9 @@
       "@planner/feature": ["./src/planner/feature/index.ts"],
       "@planner/data-access": ["./src/planner/data-access/index.ts"],
       "@planner/util": ["./src/planner/util/index.ts"],
-      "@player/feature": ["./src/player/feature/index.ts"]
+      "@player/feature": ["./src/player/feature/index.ts"],
+      "@player/data-access": ["./src/player/data-access/index.ts"],
+      "@shared/data-access": ["./src/shared/data-access/index.ts"]
     }
   },
   "angularCompilerOptions": {
