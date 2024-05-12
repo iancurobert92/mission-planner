@@ -1,7 +1,16 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { Point } from '@player/data-access';
+import { PlayerService, Point } from '@player/data-access';
 
 @Component({
   selector: 'app-player',
@@ -10,7 +19,7 @@ import { Point } from '@player/data-access';
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
-export class PlayerComponent implements AfterViewInit {
+export class PlayerComponent implements OnInit, AfterViewInit {
   @ViewChild('missionMap') missionMap?: ElementRef<HTMLCanvasElement>;
   readonly MISSIONS_MAP_WIDTH: number = 800;
   readonly MISSIONS_MAP_HEIGHT: number = 400;
@@ -20,12 +29,7 @@ export class PlayerComponent implements AfterViewInit {
   readonly BULLET_COLOR: string = 'blue';
   readonly BULLET_RADIUS: number = 10;
 
-  targetPoints: Point[] = [
-    { x: 80, y: 20 },
-    { x: 600, y: 20 },
-    { x: 600, y: 300 },
-    { x: 80, y: 300 },
-  ];
+  targetPoints: Point[] = [];
   isMoving: boolean = false;
   isDone: boolean = false;
   isCurrentTargetReached = true;
@@ -34,6 +38,20 @@ export class PlayerComponent implements AfterViewInit {
   private robotImage = new Image();
   private robotPosition: Point = { x: 0, y: 0 };
   private currentTargetPointIndex: number = 0;
+  private destroyRef = inject(DestroyRef);
+
+  constructor(private playerService: PlayerService) {}
+
+  ngOnInit(): void {
+    this.playerService.targetPoints$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) => (this.targetPoints = value));
+
+    this.playerService
+      .getTargetPoints()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+  }
 
   ngAfterViewInit(): void {
     this.initMissionsMap();
