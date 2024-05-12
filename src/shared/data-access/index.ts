@@ -1,1 +1,2 @@
-export * from './services/mission.service';
+export * from './services';
+export * from './models';
