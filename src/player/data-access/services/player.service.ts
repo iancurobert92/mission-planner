@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MissionService } from '@shared/data-access';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Point } from '../models';
-import { MissionDataService } from './mission-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class PlayerService {
     return this.targetPointsSubj.asObservable();
   }
 
-  constructor(private missionDataService: MissionDataService) {}
+  constructor(private missionDataService: MissionService) {}
 
   getTargetPoints(): Observable<Point[]> {
     return this.missionDataService
