@@ -10,7 +10,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { PlayerService, Point } from '@player/data-access';
+import { PlayerService } from '@player/data-access';
+import { Coordinate } from '@shared/data-access';
 
 @Component({
   selector: 'app-player',
@@ -29,14 +30,14 @@ export class PlayerComponent implements OnInit, AfterViewInit {
   readonly BULLET_COLOR: string = 'blue';
   readonly BULLET_RADIUS: number = 10;
 
-  targetPoints: Point[] = [];
+  targetPoints: Coordinate[] = [];
   isMoving: boolean = false;
   isDone: boolean = false;
   isCurrentTargetReached = true;
 
   private ctx?: CanvasRenderingContext2D | null;
   private robotImage = new Image();
-  private robotPosition: Point = { x: 0, y: 0 };
+  private robotPosition: Coordinate = { name: '', x: 0, y: 0 };
   private currentTargetPointIndex: number = 0;
   private destroyRef = inject(DestroyRef);
 
@@ -115,11 +116,11 @@ export class PlayerComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private goToTarget(targetPoint: Point, onComplete: () => void) {
+  private goToTarget(targetPoint: Coordinate, onComplete: () => void) {
     window.requestAnimationFrame(this.move.bind(this, targetPoint, onComplete));
   }
 
-  private move(targetPos: Point, onComplete: () => void) {
+  private move(targetPos: Coordinate, onComplete: () => void) {
     if (!this.isMoving) return;
 
     var diffX = targetPos.x - this.robotPosition.x;
