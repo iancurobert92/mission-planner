@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -16,7 +17,7 @@ import { Coordinate } from '@shared/data-access';
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [MatButton, MatIcon],
+  imports: [MatButton, MatIcon, NgFor],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
